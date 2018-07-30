@@ -1,12 +1,11 @@
+import 'dotenv/config';
 import express from 'express';
+import auth from './routes/auth';
 
 const app = express();
 
-app.get('/', (req, res) => {
-  res.json({ status: 'OK' });
-});
+app.use('/auth', auth);
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}`);
+app.listen(process.env.PORT, () => {
+  console.log(`Listening on port ${process.env.PORT}`);
 });
