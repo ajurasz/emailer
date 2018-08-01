@@ -10,7 +10,7 @@
     "start": "npm run build && node ./build/index.js",
     "server:dev": "nodemon --exec babel-node -- src/index.js",
     "client:dev": "npm start --prefix client",
-    "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\""
+    "dev": "concurrently --kill-others-on-fail \"npm run server:dev\" \"npm run client:dev\""
   },
   "engines": {
     "node": "8.9.4"
