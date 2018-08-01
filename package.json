@@ -8,7 +8,9 @@
     "build-babel": "babel -d ./build ./src -s",
     "build": "npm run clean && npm run build-babel",
     "start": "npm run build && node ./build/index.js",
-    "dev": "nodemon --exec babel-node -- src/index.js"
+    "server:dev": "nodemon --exec babel-node -- src/index.js",
+    "client:dev": "npm start --prefix client",
+    "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\""
   },
   "engines": {
     "node": "8.9.4"
@@ -29,6 +31,7 @@
     "babel-cli": "^6.26.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
+    "concurrently": "^3.6.1",
     "nodemon": "^1.18.3"
   }
 }
