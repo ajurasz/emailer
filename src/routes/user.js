@@ -3,7 +3,7 @@ import express from 'express';
 const router = express.Router();
 
 router.get('/info', (req, res) => {
-  res.json(req.user);
+  res.json(req.user.toJSON());
 });
 
 router.get('/logout', (req, res) => {

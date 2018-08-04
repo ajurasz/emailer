@@ -6,4 +6,11 @@ const schema = new Schema({
   givenName: String
 });
 
+schema.set('toJSON', {
+  transform: (doc, ret, options) => {
+    delete ret._id;
+    delete ret.__v;
+  }
+});
+
 export default mongoose.model('Users', schema);
