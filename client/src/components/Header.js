@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+
 import * as actions from '../actions';
+import AddCredits from './AddCredits';
 
 class Header extends Component {
   logout = e => {
@@ -12,13 +14,16 @@ class Header extends Component {
   renderMenu = ({ loaded, user }) => {
     if (loaded && !!user) {
       // authenticted user
-      return (
-        <li>
+      return [
+        <li key="addCredits">
+          <AddCredits />
+        </li>,
+        <li key="logout">
           <a href="/" onClick={this.logout}>
             Logout
           </a>
         </li>
-      );
+      ];
     } else {
       // anonymous
       return (
@@ -47,9 +52,9 @@ class Header extends Component {
   }
 }
 
-function mapStateToProps({ auth }) {
+function mapStateToProps({ user }) {
   return {
-    ...auth
+    ...user
   };
 }
 

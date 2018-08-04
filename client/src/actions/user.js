@@ -4,7 +4,9 @@ import {
   FETCH_USER_INIT,
   LOGOUT_USER_INIT,
   LOGOUT_USER_COMPLETE,
-  LOGOUT_USER_ERROR
+  LOGOUT_USER_ERROR,
+  NEW_PAYMENT_COMPLETE,
+  NEW_PAYMENT_ERROR
 } from './types';
 import api from '../api';
 
@@ -44,5 +46,22 @@ export const logoutUser = history => dispatch => {
         type: LOGOUT_USER_ERROR
       });
       history.push('/');
+    });
+};
+
+export const newPayment = token => dispatch => {
+  api.user
+    .newPayment()
+    .then(user => {
+      dispatch({
+        type: NEW_PAYMENT_COMPLETE,
+        user
+      });
+    })
+    .catch(err => {
+      console.error(err);
+      dispatch({
+        type: NEW_PAYMENT_ERROR
+      });
     });
 };

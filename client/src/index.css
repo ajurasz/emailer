@@ -1,0 +1,11 @@
+.jumbotron h5 {
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+.jumbotron h6 {
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 45px;
+}
