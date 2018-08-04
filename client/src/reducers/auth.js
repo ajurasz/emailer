@@ -5,6 +5,7 @@ import {
 } from '../actions';
 
 const initialState = {
+  loaded: false,
   loading: false,
   user: undefined
 };
@@ -19,12 +20,14 @@ export default function(state = initialState, action) {
     case FETCH_USER_COMPLETE:
       return {
         ...state,
+        loaded: true,
         loading: false,
         user: action.user
       };
     case FETCH_USER_ERROR:
       return {
         ...state,
+        loaded: true,
         loading: false,
         user: undefined
       };

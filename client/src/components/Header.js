@@ -3,9 +3,30 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 
 class Header extends Component {
-  componentDidMount() {
-    this.props.fetchUser();
-  }
+  componentDidMount() {}
+
+  renderMenu = () => {
+    const { loaded, loading, user } = this.props;
+
+    if (loaded && !loading && !!user) {
+      // authenticted user
+      return (
+        <li>
+          <a href="/auth/google">Logout</a>
+        </li>
+      );
+    } else if (loaded && !loading && !user) {
+      // anonymous
+      return (
+        <li>
+          <a href="/auth/google">Sign in with google</a>
+        </li>
+      );
+    } else {
+      // waiting for api call to complete
+      return;
+    }
+  };
 
   render() {
     return (
@@ -15,9 +36,7 @@ class Header extends Component {
             Emailer
           </a>
           <ul id="nav-mobile" className="right hide-on-med-and-down">
-            <li>
-              <a href="/auth/google">Sign in with google</a>
-            </li>
+            {this.renderMenu()}
           </ul>
         </div>
       </nav>
@@ -25,7 +44,13 @@ class Header extends Component {
   }
 }
 
+function mapStateToProps({ auth }) {
+  return {
+    ...auth
+  };
+}
+
 export default connect(
-  null,
+  mapStateToProps,
   actions
 )(Header);
