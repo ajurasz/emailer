@@ -1,42 +1,45 @@
 import React, { Component } from 'react';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
 class Header extends Component {
-  componentDidMount() {}
+  logout = e => {
+    e.preventDefault();
+    this.props.logoutUser(this.props.history);
+  };
 
-  renderMenu = () => {
-    const { loaded, loading, user } = this.props;
-
-    if (loaded && !loading && !!user) {
+  renderMenu = ({ loaded, user }) => {
+    if (loaded && !!user) {
       // authenticted user
       return (
         <li>
-          <a href="/auth/google">Logout</a>
+          <a href="/" onClick={this.logout}>
+            Logout
+          </a>
         </li>
       );
-    } else if (loaded && !loading && !user) {
+    } else {
       // anonymous
       return (
         <li>
           <a href="/auth/google">Sign in with google</a>
         </li>
       );
-    } else {
-      // waiting for api call to complete
-      return;
     }
   };
 
   render() {
+    const { user } = this.props;
+
     return (
       <nav>
         <div className="nav-wrapper container">
-          <a href="#" className="brand-logo">
+          <Link to={!!user ? '/surveys' : '/'} className="brand-logo">
             Emailer
-          </a>
+          </Link>
           <ul id="nav-mobile" className="right hide-on-med-and-down">
-            {this.renderMenu()}
+            {this.renderMenu(this.props)}
           </ul>
         </div>
       </nav>
@@ -50,7 +53,11 @@ function mapStateToProps({ auth }) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  actions
-)(Header);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    {
+      logoutUser: actions.logoutUser
+    }
+  )(Header)
+);

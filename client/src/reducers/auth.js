@@ -1,35 +1,38 @@
 import {
   FETCH_USER_INIT,
   FETCH_USER_COMPLETE,
-  FETCH_USER_ERROR
+  FETCH_USER_ERROR,
+  LOGOUT_USER_COMPLETE,
+  LOGOUT_USER_ERROR
 } from '../actions';
 
 const initialState = {
   loaded: false,
-  loading: false,
-  user: undefined
+  user: null
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
     case FETCH_USER_INIT:
       return {
-        ...state,
-        loading: true
+        ...state
       };
     case FETCH_USER_COMPLETE:
       return {
         ...state,
         loaded: true,
-        loading: false,
         user: action.user
       };
     case FETCH_USER_ERROR:
       return {
         ...state,
         loaded: true,
-        loading: false,
-        user: undefined
+        user: null
+      };
+    case LOGOUT_USER_COMPLETE:
+    case LOGOUT_USER_ERROR:
+      return {
+        ...initialState
       };
     default:
       return state;

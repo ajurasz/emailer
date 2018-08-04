@@ -6,7 +6,7 @@ import * as actions from '../actions';
 import Header from './Header';
 const Landing = () => <h2>Landing</h2>;
 const Dashboard = () => <h2>Dashboard</h2>;
-const SurwayNew = () => <h2>SurwayNew</h2>;
+const SurveyNew = () => <h2>SurveysNew</h2>;
 
 class App extends Component {
   componentDidMount() {
@@ -14,13 +14,25 @@ class App extends Component {
   }
 
   render() {
+    const { location } = this.props;
+
     return (
       <div>
         <Header />
         <div className="container">
-          <Route path="/" exact component={Landing} />
-          <Route path="/surways" exact component={Dashboard} />
-          <Route path="/surways/new" exact component={SurwayNew} />
+          <Route location={location} path="/" exact component={Landing} />
+          <Route
+            location={location}
+            path="/surveys"
+            exact
+            component={Dashboard}
+          />
+          <Route
+            location={location}
+            path="/surveys/new"
+            exact
+            component={SurveyNew}
+          />
         </div>
       </div>
     );
