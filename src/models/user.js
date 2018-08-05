@@ -3,7 +3,11 @@ import mongoose, { Schema } from 'mongoose';
 const schema = new Schema({
   id: String,
   familyName: String,
-  givenName: String
+  givenName: String,
+  credits: {
+    type: Number,
+    default: 0
+  }
 });
 
 schema.set('toJSON', {

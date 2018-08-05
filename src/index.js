@@ -2,12 +2,14 @@ import 'dotenv/config';
 import express from 'express';
 import mongoose from 'mongoose';
 import passport from 'passport';
+import bodyParser from 'body-parser';
 import cookieSession from 'cookie-session';
 
 import './services/passport';
 import checkAuth from './helpers/checkAuth';
 import auth from './routes/auth';
 import user from './routes/user';
+import wallet from './routes/wallet';
 
 mongoose
   .connect(
@@ -28,10 +30,12 @@ app.use(
     keys: [process.env.COOKIE_KEY]
   })
 );
+app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use('/auth', auth);
 app.use('/api/user', checkAuth, user);
+app.use('/api/wallet', checkAuth, wallet);
 
 app.listen(process.env.PORT, () => {
   console.log(`Listening on port ${process.env.PORT}`);

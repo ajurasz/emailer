@@ -3,7 +3,9 @@ import axios from 'axios';
 export default {
   user: {
     info: () => axios.get('/api/user/info').then(res => res.data),
-    logout: () => axios.get('/api/user/logout'),
-    newPayment: token => axios.post('/api/user/new-payment', { token })
+    logout: () => axios.get('/api/user/logout')
+  },
+  wallet: {
+    recharge: token => axios.post('/api/wallet/recharge', { token })
   }
 };

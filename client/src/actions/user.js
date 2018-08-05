@@ -5,8 +5,8 @@ import {
   LOGOUT_USER_INIT,
   LOGOUT_USER_COMPLETE,
   LOGOUT_USER_ERROR,
-  NEW_PAYMENT_COMPLETE,
-  NEW_PAYMENT_ERROR
+  RECHARGE_CREDITS_COMPLETE,
+  RECHARGE_CREDITS_ERROR
 } from './types';
 import api from '../api';
 
@@ -49,19 +49,20 @@ export const logoutUser = history => dispatch => {
     });
 };
 
-export const newPayment = token => dispatch => {
-  api.user
-    .newPayment()
+export const recharge = token => dispatch => {
+  api.wallet
+    .recharge(token)
+    .then(_ => api.user.info())
     .then(user => {
       dispatch({
-        type: NEW_PAYMENT_COMPLETE,
+        type: RECHARGE_CREDITS_COMPLETE,
         user
       });
     })
     .catch(err => {
       console.error(err);
       dispatch({
-        type: NEW_PAYMENT_ERROR
+        type: RECHARGE_CREDITS_ERROR
       });
     });
 };

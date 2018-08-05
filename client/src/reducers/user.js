@@ -3,7 +3,8 @@ import {
   FETCH_USER_COMPLETE,
   FETCH_USER_ERROR,
   LOGOUT_USER_COMPLETE,
-  LOGOUT_USER_ERROR
+  LOGOUT_USER_ERROR,
+  RECHARGE_CREDITS_COMPLETE
 } from '../actions';
 
 const initialState = {
@@ -33,6 +34,11 @@ export default function(state = initialState, action) {
     case LOGOUT_USER_ERROR:
       return {
         ...initialState
+      };
+    case RECHARGE_CREDITS_COMPLETE:
+      return {
+        ...state,
+        user: action.user
       };
     default:
       return state;

@@ -11,7 +11,7 @@ class AddCredits extends Component {
         name="Emailer"
         description="$5 for 5 credits"
         amount={500}
-        token={token => this.props.newPayment(token)}
+        token={token => this.props.recharge(token)}
         stripeKey={process.env.REACT_APP_STRIPE_PUBLIC_KEY}
       >
         <button className="btn">Add credits</button>
@@ -23,6 +23,6 @@ class AddCredits extends Component {
 export default connect(
   null,
   {
-    newPayment: actions.newPayment
+    recharge: actions.recharge
   }
 )(AddCredits);
