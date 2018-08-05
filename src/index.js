@@ -46,6 +46,7 @@ if (process.env.NODE_ENV === 'production') {
     console.log(
       `looking for ${req.protocol}://${req.get('host')}${req.originalUrl}`
     );
+    console.log(path.resolve(__dirname, 'client', 'build', 'index.html'));
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
