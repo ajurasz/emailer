@@ -14,7 +14,9 @@ class AddCredits extends Component {
         token={token => this.props.recharge(token)}
         stripeKey={process.env.REACT_APP_STRIPE_PUBLIC_KEY}
       >
-        <button className="btn">Add credits</button>
+        <button className="btn" disabled={this.props.disabled}>
+          Add credits
+        </button>
       </StripeCheckout>
     );
   }

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import * as actions from '../actions';
 import AddCredits from './AddCredits';
+import Spinner from './Spinner';
 
 class Header extends Component {
   logout = e => {
@@ -11,12 +12,18 @@ class Header extends Component {
     this.props.logoutUser(this.props.history);
   };
 
-  renderMenu = ({ loaded, user }) => {
+  renderMenu = ({ loaded, recharging, user }) => {
     if (loaded && !!user) {
       // authenticted user
       return [
         <li key="addCredits">
-          <AddCredits />
+          <AddCredits disabled={recharging} />
+        </li>,
+        <li
+          key="credits"
+          style={{ display: 'flex', alignItems: 'center', padding: '0 15px' }}
+        >
+          {recharging ? <Spinner /> : 'Credits: ' + user.credits}
         </li>,
         <li key="logout">
           <a href="/" onClick={this.logout}>
@@ -43,7 +50,11 @@ class Header extends Component {
           <Link to={!!user ? '/surveys' : '/'} className="brand-logo">
             Emailer
           </Link>
-          <ul id="nav-mobile" className="right hide-on-med-and-down">
+          <ul
+            id="nav-mobile"
+            className="right hide-on-med-and-down"
+            style={{ display: 'flex' }}
+          >
             {this.renderMenu(this.props)}
           </ul>
         </div>

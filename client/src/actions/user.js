@@ -6,7 +6,8 @@ import {
   LOGOUT_USER_COMPLETE,
   LOGOUT_USER_ERROR,
   RECHARGE_CREDITS_COMPLETE,
-  RECHARGE_CREDITS_ERROR
+  RECHARGE_CREDITS_ERROR,
+  RECHARGE_CREDITS_INIT
 } from './types';
 import api from '../api';
 
@@ -50,6 +51,9 @@ export const logoutUser = history => dispatch => {
 };
 
 export const recharge = token => dispatch => {
+  dispatch({
+    type: RECHARGE_CREDITS_INIT
+  });
   api.wallet
     .recharge(token)
     .then(_ => api.user.info())

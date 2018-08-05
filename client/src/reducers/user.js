@@ -4,11 +4,14 @@ import {
   FETCH_USER_ERROR,
   LOGOUT_USER_COMPLETE,
   LOGOUT_USER_ERROR,
-  RECHARGE_CREDITS_COMPLETE
+  RECHARGE_CREDITS_COMPLETE,
+  RECHARGE_CREDITS_ERROR,
+  RECHARGE_CREDITS_INIT
 } from '../actions';
 
 const initialState = {
   loaded: false,
+  recharging: false,
   user: null
 };
 
@@ -35,9 +38,16 @@ export default function(state = initialState, action) {
       return {
         ...initialState
       };
-    case RECHARGE_CREDITS_COMPLETE:
+    case RECHARGE_CREDITS_INIT:
       return {
         ...state,
+        recharging: true
+      };
+    case RECHARGE_CREDITS_COMPLETE:
+    case RECHARGE_CREDITS_ERROR:
+      return {
+        ...state,
+        recharging: false,
         user: action.user
       };
     default:
