@@ -42,6 +42,10 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 
   app.get('*', (req, res) => {
+    console.log('catch all route');
+    console.log(
+      `looking for ${req.protocol}://${req.get('host')}${req.originalUrl}`
+    );
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
