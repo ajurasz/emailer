@@ -17,4 +17,4 @@ schema.set('toJSON', {
   }
 });
 
-export default mongoose.model('Users', schema);
+export default mongoose.model('users', schema);
