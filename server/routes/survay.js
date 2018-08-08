@@ -1,4 +1,5 @@
 import express from 'express';
+import to from '../helpers/to';
 
 import Survay from '../models/survey';
 
@@ -8,8 +9,23 @@ router.get('/', (req, res) => {
   res.status(200).send();
 });
 
-router.post('/', (req, res) => {
-  const { title, subject, body, recipients } = req.body;
+router.post('/', async (req, res) => {
+  const { user } = req;
+
+  const [err, survay] = await to(
+    Survay.createFromRequest({ ...req.body, userId: user._id })
+  );
+
+  if (err) {
+    res.status(400).json({ error: 'survay is not valid' });
+    return;
+  }
+
+  if (user.credits < survay.recipients.lenght) {
+    res.status(400).json({ message: 'Not enough credits' });
+    return;
+  }
+
   res.status(200).send();
 });
 

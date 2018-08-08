@@ -1,15 +1,20 @@
 import mongoose, { Schema } from 'mongoose';
 
 export const recipientSchema = new Schema({
-  email: String,
+  email: { type: String, required: true },
   responded: { type: Boolean, default: false }
 });
 
+const minLength = min => val => val.length >= min;
+
 const schema = new Schema({
-  title: String,
-  subject: String,
-  body: String,
-  recipients: [recipientSchema],
+  title: { type: String, required: true },
+  subject: { type: String, required: true },
+  body: { type: String, required: true },
+  recipients: {
+    type: [recipientSchema],
+    validate: [minLength(1), 'Path `{PATH}` require at least 1 recipient']
+  },
   yes: { type: Number, default: 0 },
   no: { type: Number, default: 0 },
   createdAt: Date,
@@ -18,4 +23,32 @@ const schema = new Schema({
   _user: { type: Schema.Types.ObjectId, ref: 'users' }
 });
 
-export default mongoose.model('survays', schema);
+schema.statics.createFromRequest = ({
+  title,
+  subject,
+  body,
+  recipients,
+  userId
+}) => {
+  const recipientModels = (recipients || []).map(email => ({ email }));
+  const s = new Survay({
+    title,
+    subject,
+    body,
+    recipients: recipientModels,
+    createdAt: new Date(),
+    _user: userId
+  });
+  return new Promise((resolve, reject) => {
+    s.validate(err => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(s);
+      }
+    });
+  });
+};
+
+const Survay = mongoose.model('survays', schema);
+export default Survay;
