@@ -23,12 +23,19 @@ router.post('/', async (req, res) => {
     return;
   }
 
-  if (user.credits < survay.recipients.lenght) {
+  const recipientsCount = survay.recipients.length;
+
+  if (user.credits < recipientsCount) {
     res.status(400).json({ message: 'Not enough credits' });
     return;
   }
 
   sendEmail(survay, survayTemplate(survay))
+    .then(_ => survay.save())
+    .then(_ => {
+      user.subtractCredits(recipientsCount);
+      return user.save();
+    })
     .then(_ => res.status(200).send())
     .catch(err => res.status(500).json({ error: err }));
 });
