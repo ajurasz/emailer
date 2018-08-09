@@ -2,6 +2,8 @@ import express from 'express';
 import to from '../helpers/to';
 
 import Survay from '../models/survey';
+import sendEmail from '../services/mail';
+import { survayTemplate } from '../helpers/emailTemplates';
 
 const router = express.Router();
 
@@ -26,7 +28,9 @@ router.post('/', async (req, res) => {
     return;
   }
 
-  res.status(200).send();
+  sendEmail(survay, survayTemplate(survay))
+    .then(_ => res.status(200).send())
+    .catch(err => res.status(500).json({ error: err }));
 });
 
 router.post('/webhook', (req, res) => {
