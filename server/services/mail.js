@@ -10,7 +10,12 @@ export default ({ subject, recipients }, content) => {
     to: recipientsAddresses(recipients),
     from: 'no-reply@mailer.com',
     subject,
-    html: content
+    html: content,
+    trackingSettings: {
+      click_tracking: {
+        enable: true
+      }
+    }
   };
 
   return sgMail.send(msg);
