@@ -11,7 +11,7 @@ import checkAuth from './helpers/checkAuth';
 import auth from './routes/auth';
 import user from './routes/user';
 import wallet from './routes/wallet';
-import survay from './routes/survay';
+import survey from './routes/survey';
 
 mongoose
   .connect(
@@ -38,7 +38,7 @@ app.use(passport.session());
 app.use('/auth', auth);
 app.use('/api/user', checkAuth, user);
 app.use('/api/wallet', checkAuth, wallet);
-app.use('/api/survay', checkAuth, survay);
+app.use('/api/survey', checkAuth, survey);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));

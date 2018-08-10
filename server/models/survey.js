@@ -31,7 +31,7 @@ schema.statics.createFromRequest = ({
   userId
 }) => {
   const recipientModels = (recipients || []).map(email => ({ email }));
-  const s = new Survay({
+  const s = new Survey({
     title,
     subject,
     body,
@@ -50,5 +50,5 @@ schema.statics.createFromRequest = ({
   });
 };
 
-const Survay = mongoose.model('survays', schema);
-export default Survay;
+const Survey = mongoose.model('surveys', schema);
+export default Survey;

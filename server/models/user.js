@@ -10,7 +10,9 @@ const schema = new Schema({
   }
 });
 
-schema.methods.subtractCredits = number => (this.credits -= number);
+schema.methods.subtractCredits = function(number) {
+  this.credits -= number;
+};
 
 schema.set('toJSON', {
   transform: (doc, ret, options) => {

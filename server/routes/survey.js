@@ -1,9 +1,9 @@
 import express from 'express';
 import to from '../helpers/to';
 
-import Survay from '../models/survey';
+import Survey from '../models/survey';
 import sendEmail from '../services/mail';
-import { survayTemplate } from '../helpers/emailTemplates';
+import { surveyTemplate } from '../helpers/emailTemplates';
 
 const router = express.Router();
 
@@ -14,24 +14,24 @@ router.get('/', (req, res) => {
 router.post('/', async (req, res) => {
   const { user } = req;
 
-  const [err, survay] = await to(
-    Survay.createFromRequest({ ...req.body, userId: user._id })
+  const [err, survey] = await to(
+    Survey.createFromRequest({ ...req.body, userId: user._id })
   );
 
   if (err) {
-    res.status(400).json({ error: 'survay is not valid' });
+    res.status(400).json({ error: 'survey is not valid' });
     return;
   }
 
-  const recipientsCount = survay.recipients.length;
+  const recipientsCount = survey.recipients.length;
 
   if (user.credits < recipientsCount) {
     res.status(400).json({ message: 'Not enough credits' });
     return;
   }
 
-  sendEmail(survay, survayTemplate(survay))
-    .then(_ => survay.save())
+  sendEmail(survey, surveyTemplate(survey))
+    .then(_ => survey.save())
     .then(_ => {
       user.subtractCredits(recipientsCount);
       return user.save();
