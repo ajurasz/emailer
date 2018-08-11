@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import * as actions from '../actions';
-import Header from './Header';
-import Landing from './Landing';
-const Dashboard = () => <h2>Dashboard</h2>;
-const SurveyNew = () => <h2>SurveysNew</h2>;
+import * as actions from './actions';
+import Header from './components/Header';
+import Landing from './components/Landing';
+import SurveyNew from './components/SurveyNew';
+import Dashboard from './components/Dashboard';
 
 class App extends Component {
   componentDidMount() {

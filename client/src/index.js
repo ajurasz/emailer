@@ -9,7 +9,7 @@ import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProductio
 import thunk from 'redux-thunk';
 
 import './index.css';
-import App from './components/App';
+import App from './App';
 import reducers from './reducers';
 
 const store = createStore(
