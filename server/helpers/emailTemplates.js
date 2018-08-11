@@ -1,19 +1,13 @@
+import pug from 'pug';
+import path from 'path';
+
+const compiledSurveyTemplate = pug.compileFile(
+  path.join(__dirname, 'templates', 'survey.pug')
+);
+
 export const surveyTemplate = survey => {
-  return `
-  <html>
-  <body>
-    <div style="text-align: center;">
-      <h3>I'd like your input!</h3>
-      <p>Please answer the following question:</p>
-      <p>${survey.body}</p>
-      <div>
-        <a href="http://localhost:3000">Yes</a>
-      </div>
-      <div>
-        <a href="http://localhost:3000">No</a>
-      </div>
-    </div>
-  </body>
-</html>
-    `;
+  return compiledSurveyTemplate({
+    body: survey.body,
+    redirectTo: `${process.env.DOMAIN}/thanks`
+  });
 };
