@@ -1,14 +1,14 @@
 import React from 'react';
 
-const FormField = ({ input, label, meta }) => {
+const FormField = ({ input, label, meta: { active, touched, error } }) => {
   const isFormActive = () => {
-    return !!input.value || meta.active;
+    return !!input.value || active;
   };
 
-  const hasError = () => meta.touched && meta.error;
+  const hasError = () => touched && error;
 
   const validateClass = () => {
-    if (!meta.touched) {
+    if (!touched) {
       return '';
     } else if (hasError()) {
       return 'invalid';
@@ -24,7 +24,7 @@ const FormField = ({ input, label, meta }) => {
         <label htmlFor={input.name} className={isFormActive() ? 'active' : ''}>
           {label}
         </label>
-        {hasError() && <span className="helper-text" data-error={meta.error} />}
+        {hasError() && <span className="helper-text" data-error={error} />}
       </div>
     </div>
   );
