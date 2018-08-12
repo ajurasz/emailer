@@ -5,25 +5,14 @@ import SurveyNewForm from './forms/SurveyNewForm';
 import SurveyConfirmationForm from './forms/SurveyConfirmationForm';
 
 class SurveyNew extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      page: 1
-    };
-  }
+  state = { page: 1 };
 
   nextPage = () => {
-    this.setState({
-      ...this.state,
-      page: this.state.page + 1
-    });
+    this.setState({ page: this.state.page + 1 });
   };
 
   prevPage = () => {
-    this.setState({
-      ...this.state,
-      page: this.state.page - 1
-    });
+    this.setState({ page: this.state.page - 1 });
   };
 
   submitForm = values => {
