@@ -1,5 +1,4 @@
 import axios from 'axios';
-window.axios = axios;
 
 export default {
   user: {
@@ -8,5 +7,12 @@ export default {
   },
   wallet: {
     recharge: token => axios.post('/api/wallet/recharge', { token })
+  },
+  survey: {
+    create: survey =>
+      axios.post('/api/survey', {
+        ...survey,
+        recipients: survey.recipients.split(',')
+      })
   }
 };

@@ -7,7 +7,10 @@ import {
   LOGOUT_USER_ERROR,
   RECHARGE_CREDITS_COMPLETE,
   RECHARGE_CREDITS_ERROR,
-  RECHARGE_CREDITS_INIT
+  RECHARGE_CREDITS_INIT,
+  SUBMIT_SURVEY_INIT,
+  SUBMIT_SURVEY_COMPLETE,
+  SUBMIT_SURVEY_ERROR
 } from './types';
 import api from '../api';
 
@@ -67,6 +70,28 @@ export const recharge = token => dispatch => {
       console.error(err);
       dispatch({
         type: RECHARGE_CREDITS_ERROR
+      });
+    });
+};
+
+export const submitSurvey = (survey, history) => dispatch => {
+  dispatch({
+    type: SUBMIT_SURVEY_INIT
+  });
+  api.survey
+    .create(survey)
+    .then(_ => api.user.info())
+    .then(user => {
+      dispatch({
+        type: SUBMIT_SURVEY_COMPLETE,
+        user
+      });
+      history.push('/surveys');
+    })
+    .catch(err => {
+      console.error(err);
+      dispatch({
+        type: SUBMIT_SURVEY_ERROR
       });
     });
 };

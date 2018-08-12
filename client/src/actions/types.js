@@ -9,3 +9,7 @@ export const LOGOUT_USER_ERROR = '[User] Logout user error';
 export const RECHARGE_CREDITS_INIT = '[User] Recharge credits init';
 export const RECHARGE_CREDITS_COMPLETE = '[User] Recharge credits complete';
 export const RECHARGE_CREDITS_ERROR = '[User] Recharge credits error';
+
+export const SUBMIT_SURVEY_INIT = '[User] Submit survey init';
+export const SUBMIT_SURVEY_COMPLETE = '[User] Submit survey complete';
+export const SUBMIT_SURVEY_ERROR = '[User] Submit survey error';

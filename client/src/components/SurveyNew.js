@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
+import * as actions from '../actions';
 import SurveyNewForm from './forms/SurveyNewForm';
 import SurveyConfirmationForm from './forms/SurveyConfirmationForm';
 
@@ -16,7 +19,8 @@ class SurveyNew extends Component {
   };
 
   submitForm = values => {
-    console.log(values);
+    const { submitSurvey, history } = this.props;
+    submitSurvey(values, history);
   };
 
   render() {
@@ -35,6 +39,11 @@ class SurveyNew extends Component {
   }
 }
 
-export default reduxForm({
-  form: 'survey'
-})(SurveyNew);
+export default connect(
+  null,
+  { submitSurvey: actions.submitSurvey }
+)(
+  reduxForm({
+    form: 'survey'
+  })(withRouter(SurveyNew))
+);
