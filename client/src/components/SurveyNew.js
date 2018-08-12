@@ -4,11 +4,42 @@ import SurveyNewForm from './forms/SurveyNewForm';
 import SurveyConfirmationForm from './forms/SurveyConfirmationForm';
 
 class SurveyNew extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      page: 1
+    };
+  }
+
+  nextPage = () => {
+    this.setState({
+      ...this.state,
+      page: this.state.page + 1
+    });
+  };
+
+  prevPage = () => {
+    this.setState({
+      ...this.state,
+      page: this.state.page - 1
+    });
+  };
+
+  submitForm = values => {
+    console.log(values);
+  };
+
   render() {
+    const { page } = this.state;
     return (
       <div>
-        <SurveyNewForm />
-        <SurveyConfirmationForm />
+        {page === 1 && <SurveyNewForm onSubmit={this.nextPage} />}
+        {page === 2 && (
+          <SurveyConfirmationForm
+            onBack={this.prevPage}
+            onSubmit={this.submitForm}
+          />
+        )}
       </div>
     );
   }

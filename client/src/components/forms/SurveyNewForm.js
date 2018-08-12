@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 
 import FormField from './FormField';
@@ -17,7 +18,22 @@ const renderFields = () =>
     );
   });
 
-let SurveyNewForm = () => <div>{renderFields()}</div>;
+let SurveyNewForm = ({ handleSubmit }) => (
+  <div>
+    <form onSubmit={handleSubmit}>
+      {renderFields()}
+      <div className="row">
+        <Link to="/surveys" className="red btn-flat white-text">
+          Cancel
+        </Link>
+        <button type="submit" className="teal btn-flat right white-text">
+          Next
+          <i className="material-icons right">done</i>
+        </button>
+      </div>
+    </form>
+  </div>
+);
 
 const validate = values => {
   const errors = {};
@@ -32,6 +48,7 @@ const validate = values => {
 
 SurveyNewForm = reduxForm({
   form: 'survey',
+  destroyOnUnmount: false,
   validate
 })(SurveyNewForm);
 export default SurveyNewForm;
