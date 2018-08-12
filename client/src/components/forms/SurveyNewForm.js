@@ -4,6 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 
 import FormField from './FormField';
 import fields from './fields';
+import { validateEmails } from '../../helpers/emailValidators';
 
 const renderFields = () =>
   fields.map(({ label, name }) => {
@@ -37,6 +38,14 @@ let SurveyNewForm = ({ handleSubmit }) => (
 
 const validate = values => {
   const errors = {};
+
+  if (values.recipients) {
+    const invalidEmails = validateEmails(values.recipients || '');
+    if (invalidEmails.length) {
+      errors.recipients = `These emails are invalid: ${invalidEmails}`;
+    }
+  }
+
   fields.forEach(({ label, name }) => {
     if (!values[name]) {
       errors[name] = `${label} is required`;
