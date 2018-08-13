@@ -19,8 +19,8 @@ class SurveyNew extends Component {
   };
 
   submitForm = values => {
-    const { submitSurvey, history } = this.props;
-    submitSurvey(values, history);
+    const { createSurvey, history } = this.props;
+    createSurvey(values, history);
   };
 
   render() {
@@ -41,7 +41,7 @@ class SurveyNew extends Component {
 
 export default connect(
   null,
-  { submitSurvey: actions.submitSurvey }
+  { createSurvey: actions.createSurvey }
 )(
   reduxForm({
     form: 'survey'

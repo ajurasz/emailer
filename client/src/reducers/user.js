@@ -6,8 +6,7 @@ import {
   LOGOUT_USER_ERROR,
   RECHARGE_CREDITS_COMPLETE,
   RECHARGE_CREDITS_ERROR,
-  RECHARGE_CREDITS_INIT,
-  SUBMIT_SURVEY_COMPLETE
+  RECHARGE_CREDITS_INIT
 } from '../actions';
 
 const initialState = {
@@ -49,11 +48,6 @@ export default function(state = initialState, action) {
       return {
         ...state,
         recharging: false,
-        user: action.user
-      };
-    case SUBMIT_SURVEY_COMPLETE:
-      return {
-        ...state,
         user: action.user
       };
     default:

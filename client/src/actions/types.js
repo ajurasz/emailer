@@ -10,6 +10,6 @@ export const RECHARGE_CREDITS_INIT = '[User] Recharge credits init';
 export const RECHARGE_CREDITS_COMPLETE = '[User] Recharge credits complete';
 export const RECHARGE_CREDITS_ERROR = '[User] Recharge credits error';
 
-export const SUBMIT_SURVEY_INIT = '[User] Submit survey init';
-export const SUBMIT_SURVEY_COMPLETE = '[User] Submit survey complete';
-export const SUBMIT_SURVEY_ERROR = '[User] Submit survey error';
+export const CREATE_SURVEY_INIT = '[Survey] Create survey init';
+export const CREATE_SURVEY_COMPLETE = '[Survey] Create survey complete';
+export const CREATE_SURVEY_ERROR = '[Survey] Create survey error';
