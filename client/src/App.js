@@ -7,6 +7,7 @@ import Header from './components/Header';
 import Landing from './components/Landing';
 import SurveyNew from './components/SurveyNew';
 import Dashboard from './components/Dashboard';
+import Thanks from './components/Thanks';
 
 class App extends Component {
   componentDidMount() {
@@ -33,6 +34,7 @@ class App extends Component {
             exact
             component={SurveyNew}
           />
+          <Route location={location} path="/thanks" exact component={Thanks} />
         </div>
       </div>
     );

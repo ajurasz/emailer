@@ -12,6 +12,7 @@ import auth from './routes/auth';
 import user from './routes/user';
 import wallet from './routes/wallet';
 import survey from './routes/survey';
+import feedback from './routes/feedback';
 
 mongoose
   .connect(
@@ -39,6 +40,7 @@ app.use('/auth', auth);
 app.use('/api/user', checkAuth, user);
 app.use('/api/wallet', checkAuth, wallet);
 app.use('/api/survey', checkAuth, survey);
+app.use('/feedback', feedback);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));

@@ -8,6 +8,7 @@ const compiledSurveyTemplate = pug.compileFile(
 export const surveyTemplate = survey => {
   return compiledSurveyTemplate({
     body: survey.body,
-    redirectTo: `${process.env.DOMAIN}/thanks`
+    yesRedirect: `${process.env.API_DOMAIN}/feedback/${survey.id}/yes`,
+    noRedirect: `${process.env.API_DOMAIN}/feedback/${survey.id}/no`
   });
 };
