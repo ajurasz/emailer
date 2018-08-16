@@ -40,8 +40,4 @@ router.post('/', async (req, res) => {
     .catch(err => res.status(500).json({ error: err }));
 });
 
-router.post('/webhook', (req, res) => {
-  res.status(200).send();
-});
-
 export default router;
