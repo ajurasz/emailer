@@ -11,8 +11,7 @@
     "start": "npm run build && node ./build/index.js",
     "server:dev": "nodemon --inspect --ignore client/ --exec babel-node -- server/index.js",
     "client:dev": "npm start --prefix client",
-    "webhook": "lt -p 5000 -s maileraj1234",
-    "dev": "concurrently --kill-others-on-fail \"npm run server:dev\" \"wait-on tcp:5000 && npm run client:dev\" \"npm run webhook\""
+    "dev": "concurrently --kill-others-on-fail \"npm run server:dev\" \"wait-on tcp:5000 && npm run client:dev\""
   },
   "engines": {
     "node": "8.9.4"
@@ -30,7 +29,8 @@
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
     "pug": "^2.0.3",
-    "stripe": "^6.7.0"
+    "stripe": "^6.7.0",
+    "url-pattern": "^1.0.3"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
