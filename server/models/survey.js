@@ -50,5 +50,28 @@ schema.statics.createFromRequest = ({
   });
 };
 
+schema.statics.updateStats = ({ surveyId, email, choice }) => {
+  Survey.updateOne(
+    {
+      _id: surveyId,
+      recipients: {
+        $elemMatch: {
+          email,
+          responded: false
+        }
+      }
+    },
+    {
+      $inc: {
+        [choice]: 1
+      },
+      $set: {
+        'recipients.$.responded': true
+      },
+      updatedAt: new Date()
+    }
+  ).exec();
+};
+
 const Survey = mongoose.model('surveys', schema);
 export default Survey;
