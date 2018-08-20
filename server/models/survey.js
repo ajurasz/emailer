@@ -73,5 +73,11 @@ schema.statics.updateStats = ({ surveyId, email, choice }) => {
   ).exec();
 };
 
+schema.set('toJSON', {
+  transform: (doc, ret, options) => {
+    delete ret.__v;
+  }
+});
+
 const Survey = mongoose.model('surveys', schema);
 export default Survey;

@@ -8,7 +8,18 @@ import { surveyTemplate } from '../helpers/emailTemplates';
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  res.status(200).send();
+  const { user } = req;
+
+  Survey.find({
+    _user: user._id
+  })
+    .select({
+      recipients: false,
+      _user: false
+    })
+    .then(docs => docs.map(doc => doc.toJSON()))
+    .then(docs => res.send(docs))
+    .catch(err => res.status(500).json({ error: err }));
 });
 
 router.post('/', async (req, res) => {
