@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import * as actions from '../actions';
+import ProgressBar from './ProgressBar';
 
 class SurveysList extends Component {
   componentDidMount() {
@@ -34,14 +35,20 @@ class SurveysList extends Component {
   }
 
   render() {
-    const { surveys } = this.props;
+    const { surveys, loading } = this.props;
     console.log(surveys);
-    return surveys.map(this.renderCard);
+    return (
+      <div>
+        {loading && <ProgressBar />}
+        {surveys.map(this.renderCard)}
+      </div>
+    );
   }
 }
 
 const mapStateToProps = ({ survey }) => ({
-  surveys: survey.surveys
+  surveys: survey.surveys,
+  loading: survey.loading
 });
 
 export default connect(
