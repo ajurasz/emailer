@@ -17,6 +17,7 @@ router.get('/', (req, res) => {
       recipients: false,
       _user: false
     })
+    .sort({ createdAt: -1 })
     .then(docs => docs.map(doc => doc.toJSON()))
     .then(docs => res.send(docs))
     .catch(err => res.status(500).json({ error: err }));
@@ -42,7 +43,10 @@ router.post('/', async (req, res) => {
   }
 
   sendEmail(survey, surveyTemplate(survey))
-    .then(_ => survey.save())
+    .then(_ => {
+      survey.sentAt = new Date();
+      return survey.save();
+    })
     .then(_ => {
       user.subtractCredits(recipientsCount);
       return user.save();

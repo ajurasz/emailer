@@ -13,6 +13,7 @@ export default {
       axios.post('/api/survey', {
         ...survey,
         recipients: survey.recipients.split(',')
-      })
+      }),
+    get: () => axios.get('/api/survey').then(res => res.data)
   }
 };

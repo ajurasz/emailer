@@ -13,3 +13,7 @@ export const RECHARGE_CREDITS_ERROR = '[User] Recharge credits error';
 export const CREATE_SURVEY_INIT = '[Survey] Create survey init';
 export const CREATE_SURVEY_COMPLETE = '[Survey] Create survey complete';
 export const CREATE_SURVEY_ERROR = '[Survey] Create survey error';
+
+export const FETCH_SURVEYS_INIT = '[Survey] Fetch surverys init';
+export const FETCH_SURVEYS_COMPLETE = '[Survey] Fetch surverys complete';
+export const FETCH_SURVEYS_FAIL = '[Survey] Fetch surverys fail';

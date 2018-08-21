@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import SurveysList from './SurveysList';
+
 const Dashboard = () => (
   <div>
-    Dashboard
+    <SurveysList />
     <div className="fixed-action-btn">
       <Link
         to="/surveys/new"
